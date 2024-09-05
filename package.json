@@ -1,0 +1,14 @@
+{
+  "name": "chaindots-server",
+  "version": "1.0.0",
+  "description": "This is a ready RESTful API created with the JSON Server package",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "db": "json-server --watch data/db.json --port 8000"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "json-server": "^0.17.4"
+  }
+}
