@@ -1,11 +1,17 @@
 // JSON Server module
 const jsonServer = require("json-server");
 const server = jsonServer.create();
-const router = jsonServer.router("data/db.json");
+const fs = require("fs");
+const path = require("path");
 const middlewares = jsonServer.defaults();
+// Make sure the db.json is only read-only and served from memory to avoid errors when deployed to vercel.
+const data = JSON.parse(
+  fs.readFileSync(path.join(__dirname, "db.json"), "utf-8")
+);
+const router = jsonServer.router(data);
 
 server.use(middlewares);
-// Add this before server.use(router)
+
 server.use(
   // Add custom route here if needed
   jsonServer.rewriter({
@@ -13,7 +19,7 @@ server.use(
   })
 );
 server.use(router);
-server.listen(8000, () => {
+server.listen(3000, () => {
   console.log("JSON Server is running");
 });
 
